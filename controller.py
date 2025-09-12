@@ -43,9 +43,9 @@ def handle_fill_profile(message): # Пошаговое заполнение пр
             user_states[message.chat.id] = ASK_SMOKING_TYPE
             return v.ask_smoking_type(), v.ask_smoking_type_keyboard(), None
         elif message.text.lower() == "нет":
-            db.save_user(message.chat_id, smoking_status=False)
+            db.save_user(message.chat.id, message.from_user.username, smoking_status=False)
             user_states.pop(message.chat.id, None)
-            return "Отлично 🚀 Рад, что тебе не нужно бороться с этой привычкой!", None, None
+            return "Отлично 🚀 Рад, что тебе не нужно бороться с этой привычкой!", ReplyKeyboardRemove(), None
         else:
             return "Пожалуйста, выбери 'Да' или 'Нет'.", None, None
     #что курит
